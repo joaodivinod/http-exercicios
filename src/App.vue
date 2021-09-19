@@ -1,8 +1,8 @@
 <template>
     <div id="app" class="container">
         <section class="mt-5 col-md-6 mx-auto d-flex flex-column">
-
-            <input v-model="usuario.nome" class="" type="text" placeholder="Nome" required>
+          
+          <input v-model="usuario.nome" class="" type="text" placeholder="Nome" required>
             <input v-model="usuario.email" class="mt-4" type="email" placeholder="E-mail" required>
 
             <div class="row">
@@ -18,7 +18,6 @@
                 <p>E-mail : {{users.email}}</p>
 
                 <hr>
-
             </div>
 
         </section>
@@ -29,6 +28,7 @@
 export default {
     data() {
         return {
+            personagens:[],
             usuarios: [],
             usuario: {
                 nome: '',
@@ -38,6 +38,12 @@ export default {
     },
 
     created() {
+      this.rickAndMorty.get('/361').then(
+          res => {
+            this.personagens = res.data
+            console.log(this.personagens)
+          }
+      )
 
     },
 
@@ -55,7 +61,12 @@ export default {
                 .then(res => {
                 this.usuarios = res.data
             } )
-        }
+        },
+
+        // getCharacter(){
+        //   this.rickAndMorty('?page=20')
+        //   .then()
+        // }
 
     }
 }
